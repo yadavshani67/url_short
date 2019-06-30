@@ -3,10 +3,12 @@
 {% for obj in objs %}
     {{obj.pk}}
     <h2>{{ obj.long_url }}</h2><br>
-    <a href="{{ obj.long_url}}">https://go.to/{{obj.shortcode}}</a>
+    <a href="{% url 'redirect' obj.shortcode %}">https://go.to/{{obj.shortcode}}</a>
     <hr>
-    <button><a href="http://127.0.0.1.:8000/edit/{{obj.pk}}">Edit</a></button>
-    <button><a href="http://127.0.0.1.:8000/delete/{{obj.pk}}">Delete</a></button>
+    {% if request.user.is_authenticated %}
+    <button><a href="{% url 'update' obj.pk %}">Edit</a></button>
+    <button><a href="{% url 'delete' obj.pk %}">Delete</a></button>
+    {% endif %}
     <h2>{{ obj.shortcode }}</h2><br>
     <h2>{{ obj.created_date }}</h2><br>
 {% endfor %}
