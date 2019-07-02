@@ -1,14 +1,39 @@
-<h1> New File </h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home | URL-Shortner</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Url shortner App">
+    <meta name="keywords" content="URL Shortner,Futurebyte,URL,Short url">
+    <meta name="author" content="Futurebyte Inc.">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">   
+</head>
+<body>
 
-{% for obj in objs %}
-    {{obj.pk}}
-    <h2>{{ obj.long_url }}</h2><br>
-    <a href="{% url 'redirect' obj.shortcode %}">https://go.to/{{obj.shortcode}}</a>
-    <hr>
-    {% if request.user.is_authenticated %}
-    <button><a href="{% url 'update' obj.pk %}">Edit</a></button>
-    <button><a href="{% url 'delete' obj.pk %}">Delete</a></button>
-    {% endif %}
-    <h2>{{ obj.shortcode }}</h2><br>
-    <h2>{{ obj.created_date }}</h2><br>
-{% endfor %}
+    <div class="header">
+        <a href="{% url 'create' %}"><h1>Futurebyte club => {{ request.user.username }}</h1></a>
+    </div>
+
+    
+    {% for obj in objs %}
+        <div class="main-content">
+            <h2>{{ obj.long_url }}</h2>
+            <a href="{% url 'redirect' obj.shortcode %}" target="_blank"><h4>https://go.to/{{ obj.shortcode }}</h4></a>
+            <h4>{{ obj.created_date }}</h4>
+            {% if request.user.is_authenticated %}
+            {% ifequal request.user.username obj.user %}
+                <button><a href="{% url 'update' obj.pk %}"><h3>Edit</h3></a></button>
+                <button><a href="{% url 'delete' obj.pk %}"><h3>Delete</h3></a></button>
+            {% endifequal %}
+            {% endif %}
+        </div>
+        <div class="hor">
+        </div>
+    {% endfor %}
+
+</body>
+</html>

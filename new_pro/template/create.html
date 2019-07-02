@@ -1,12 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
 <head>
- <title>Create! New URL</title>
- </head>
- <body>
-  <h2>Short your URL</h2>
-  <form method="POST">{% csrf_token %}
-    {{ urlform.as_p }}
-    <input type="submit" value="click here">
-</form>
+    <title>Add | URL-Shortner</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Url shortner App">
+    <meta name="keywords" content="URL Shortner,Futurebyte,URL,Short url">
+    <meta name="author" content="Futurebyte Inc.">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">   
+</head>
+<body>
+
+    <div class="header">
+        <a href="{% url 'create' %}"><h1>Futurebyte club</h1></a>
+    </div>
+
+    <div class="main-content">
+        <h2>Enter Long URL</h2>
+        <form method="POST">{% csrf_token %}
+            {{ urlform.as_p }}
+            <input type="submit" value="CLICK ME">
+        </form>
+    </div>
+
 </body>
 </html>
